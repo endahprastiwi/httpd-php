@@ -1,0 +1,22 @@
+FROM php 
+
+
+ENV APACHE_LOCK_DIR /var/lock
+ENV APACHE_PID_FILE /var/run/apache2.pid
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_LOG_DIR /var/log
+ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+
+RUN apt-get -y update
+RUN apt-get -y install apache2 
+
+COPY ./public_html/ /usr/local/apache2/htdocs/
+
+EXPOSE 80
+
+CMD ["apachectl","start"] 
+
+
+
